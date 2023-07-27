@@ -1,0 +1,30 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=parallel_propeller_aaa-aaa.pdb
+WHOLEMOLECULES ENTITY0=1-293	
+
+# HBfix SECTION
+group_1: COORDINATION PAIR GROUPA=21,18,54,51,87,84 GROUPB=209,212,242,245,275,278 SWITCH={CUSTOM FUNC=((-2092.0000000000)*(0.3-x)^2)*step(x-0.3)*step(0.4-x)+((-2092.0000000000)*(0.1)*(2*x-0.7))*step(x-0.4)+((2615.0000000000)*(0.3-x)^2)*step(x-0.3)*step(0.38-x)+((2615.0000000000)*(0.08)*(2*x-0.68))*step(x-0.38) R_0=1.0}
+
+tot_1: COMBINE ARG=group_1 COEFFICIENTS=@replicas:{2.0000000,1.9092000,1.8225220,1.7397800,1.6607940,1.5853940,1.5134160,1.4447080,1.3791180,1.3165060,1.2567360,1.1996800} PERIODIC=NO
+
+BIASVALUE ARG=tot_1 LABEL=all_group_1
+
+# biasing eRMSD:
+DISTfull: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3,@lcs-7,@lcs-8,@lcs-9 REFERENCE=parallel_propeller_aaa-aaa.pdb CUTOFF=3.2
+DISTg5end: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3 REFERENCE=parallel_propeller_aaa-aaa.pdb CUTOFF=3.2
+DISTg3end: ERMSD ATOMS=@lcs-7,@lcs-8,@lcs-9 REFERENCE=parallel_propeller_aaa-aaa.pdb CUTOFF=3.2
+
+COMBINE  LABEL=DD  ARG=DISTfull,DISTg5end,DISTg3end COEFFICIENTS=6,-3,-3 POWERS=2,2,2 PERIODIC=NO
+COMBINE LABEL=interD  ARG=DD POWERS=0.5 PERIODIC=NO COEFFICIENTS=0.40824829 #COEF=sqrt(1/6)
+
+# eRMSD with standard cutoff (2.4), used for monitoring only:
+DIST1: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3,@lcs-7,@lcs-8,@lcs-9 REFERENCE=parallel_propeller_aaa-aaa.pdb
+
+# metadynamics
+metad: METAD ARG=interD PACE=250 TAU=70 SIGMA=0.1 FILE=HILLS TEMP=298 BIASFACTOR=15 GRID_MIN=0 GRID_MAX=4.0 GRID_SPACING=0.02
+
+# print 
+PRINT ARG=tot_1,all_group_1.bias STRIDE=250 FILE=check_hbfix.dat
+PRINT ARG=interD,DIST1,metad.bias FILE=COLVAR STRIDE=250
+

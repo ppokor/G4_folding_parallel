@@ -1,0 +1,22 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=parallel_propeller_aaa-aaa.pdb
+WHOLEMOLECULES ENTITY0=1-293	
+
+# biasing eRMSD:
+DISTfull: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3,@lcs-7,@lcs-8,@lcs-9 REFERENCE=parallel_propeller_aaa-aaa.pdb CUTOFF=3.2
+DISTg5end: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3 REFERENCE=parallel_propeller_aaa-aaa.pdb CUTOFF=3.2
+DISTg3end: ERMSD ATOMS=@lcs-7,@lcs-8,@lcs-9 REFERENCE=parallel_propeller_aaa-aaa.pdb CUTOFF=3.2
+
+COMBINE  LABEL=DD  ARG=DISTfull,DISTg5end,DISTg3end COEFFICIENTS=6,-3,-3 POWERS=2,2,2 PERIODIC=NO
+COMBINE LABEL=interD  ARG=DD POWERS=0.5 PERIODIC=NO COEFFICIENTS=0.40824829 #COEF=sqrt(1/6)
+
+# eRMSD with standard cutoff (2.4), used for monitoring only:
+DIST1: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3,@lcs-7,@lcs-8,@lcs-9 REFERENCE=parallel_propeller_aaa-aaa.pdb
+
+# metadynamics
+metad: METAD ARG=interD PACE=250 TAU=70 SIGMA=0.1 FILE=HILLS TEMP=298 BIASFACTOR=15 GRID_MIN=0 GRID_MAX=4.0 GRID_SPACING=0.02
+
+# print colvar file
+PRINT ARG=interD,DIST1,metad.bias FILE=COLVAR STRIDE=250
+
