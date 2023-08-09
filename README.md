@@ -4,4 +4,4 @@ trajectory data will be uploaded to Zenodo soon
 
 Manuscript will be uploaded to biorXiv soon
 
-![](https://github.com/ppokor/G4_folding_parallel/blob/main/folding1.gif)
+![](https://github.com/ppokor/G4_folding_parallel/blob/main/folding6_240ns.gif)
