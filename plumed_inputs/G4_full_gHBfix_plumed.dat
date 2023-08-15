@@ -1,5 +1,5 @@
 # vim:ft=plumed
-LOAD FILE=./GHBFIX.so
+LOAD FILE=./GHBFIX.cpp
 
 
 MOLINFO STRUCTURE=../reference_structures/G4/G4_full.pdb
