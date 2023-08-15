@@ -1,0 +1,4 @@
+#! FIELDS time interD sigma_interD height biasf
+#! SET multivariate false
+#! SET kerneltype gaussian
+ 1 0.0 0.0 0.0 15

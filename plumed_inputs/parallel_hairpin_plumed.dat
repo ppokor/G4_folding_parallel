@@ -1,13 +1,13 @@
 # vim:ft=plumed
 
-MOLINFO STRUCTURE=parallel_propeller_aaa-aaa.pdb
+MOLINFO STRUCTURE=../reference_structures/GGGTTAGGG/parallel_propeller_aaa-aaa.pdb
 WHOLEMOLECULES ENTITY0=1-293	
 
 # biasing eRMSD:
-DIST0: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3,@lcs-7,@lcs-8,@lcs-9 REFERENCE=parallel_propeller_aaa-aaa.pdb CUTOFF=3.2
+DIST0: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3,@lcs-7,@lcs-8,@lcs-9 REFERENCE=../reference_structures/GGGTTAGGG/parallel_propeller_aaa-aaa.pdb CUTOFF=3.2
 
 # eRMSD with standard cutoff (2.4), used for monitoring only:
-DIST1: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3,@lcs-7,@lcs-8,@lcs-9 REFERENCE=parallel_propeller_aaa-aaa.pdb
+DIST1: ERMSD ATOMS=@lcs-1,@lcs-2,@lcs-3,@lcs-7,@lcs-8,@lcs-9 REFERENCE=../reference_structures/GGGTTAGGG/parallel_propeller_aaa-aaa.pdb
 
 # metadynamics
 metad: METAD ARG=DIST0 PACE=250 TAU=70 SIGMA=0.1 FILE=HILLS TEMP=298 BIASFACTOR=15 GRID_MIN=0 GRID_MAX=5.0 GRID_SPACING=0.02
