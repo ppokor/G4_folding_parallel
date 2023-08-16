@@ -1,5 +1,7 @@
 # vim:ft=plumed
-LOAD FILE=./GHBFIX.cpp
+
+# uncomment the following LOAD line if using older version of PLUMED:
+# LOAD FILE=./GHBFIX.cpp
 
 MOLINFO STRUCTURE=../reference_structures/GGGTTAGGG/parallel_propeller_aaa-aaa.pdb
 WHOLEMOLECULES ENTITY0=1-293	
