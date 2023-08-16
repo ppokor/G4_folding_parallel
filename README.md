@@ -1,6 +1,7 @@
 input and analysis files for simulations of GGGAGGGAGGGAGGG G4 and GGGAGGG/GGGTTAGGG hairpins
 
-trajectory data will be uploaded to Zenodo soon
+trajectories and bias files are here: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8247281.svg)](https://doi.org/10.5281/zenodo.8247281)
+ 
 
 PLUMED egg is here: [![plumID:23.033](https://www.plumed-nest.org/eggs/23/033/badge.svg)](https://www.plumed-nest.org/eggs/23/033/)
 
