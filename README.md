@@ -5,7 +5,7 @@ trajectories and bias files are here: [![DOI](https://zenodo.org/badge/DOI/10.52
 
 PLUMED egg is here: [![plumID:23.033](https://www.plumed-nest.org/eggs/23/033/badge.svg)](https://www.plumed-nest.org/eggs/23/033/)
 
-Manuscript will be uploaded to biorXiv soon
+Manuscript: https://doi.org/10.1016/j.ijbiomac.2024.129712 
 
 ![](https://github.com/ppokor/G4_folding_parallel/blob/main/folding6_240ns.gif)
 
